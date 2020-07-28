@@ -1,0 +1,65 @@
+﻿@model IEnumerable<EntityModel.OrderBasket>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th>Bucket Name</th>
+            <td> @ViewBag.BucketName </td>
+            <th>SKU</th>
+            <td> @ViewBag.SKU </td>
+
+        </tr>
+        <tr>
+            <th></th>
+            <td></td>
+            <th>Order Date</th>
+            <td> @ViewBag.DeliveryDate </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="4">
+                <table class="table table-bordered table-responsive">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BasketID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BasketName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SKUID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderBy)
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BasketID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BasketName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SKUID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderBy)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

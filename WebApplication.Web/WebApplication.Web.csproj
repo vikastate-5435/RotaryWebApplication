@@ -185,6 +185,9 @@
     <Content Include="Views\BasketMasters\Edit.cshtml" />
     <Content Include="Views\BasketMasters\Index.cshtml" />
     <Content Include="Views\Shared\_BasketDetailPartialView.cshtml" />
+    <Content Include="Views\Shared\_BasketDetailsPartialView.cshtml" />
+    <Content Include="Views\Shared\_OrderedBasketsPartialView.cshtml" />
+    <Content Include="Views\Home\PlacedOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

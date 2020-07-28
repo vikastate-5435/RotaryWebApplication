@@ -1,0 +1,95 @@
+﻿@model IEnumerable<EntityModel.OrderBasket>
+
+@{
+    ViewBag.Title = "PlacedOrders";
+}
+
+
+<style>
+    .modal-dialog {
+        overflow-y: initial !important
+    }
+
+    .modal-body {
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+    }
+</style>
+<br />
+<hr />
+
+<div id="divBasket">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BasketID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BasketName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SKUID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderBy)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasketID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasketName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SKUID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderBy)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-link" onclick="LoadBasketListPopModel(@item.BasketID)">Order Details </button>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+
+
+<div class="modal fade product_view" id="basketProductList">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title"> Orders List </h3>
+            </div>
+            <div class="modal-body" id="basketItems">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var LoadBasketListPopModel = function (basketId) {
+        var url = "/Home/GetBasketDetails?basketId=" + basketId;
+        $("#basketItems").load(url, function (data) {
+            $("#basketProductList").modal("show");
+        })
+    }
+
+</script>
+

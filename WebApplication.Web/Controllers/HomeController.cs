@@ -72,5 +72,18 @@ namespace WebApplication.Web.Controllers
             }
             return ip;
         }
+
+        public ActionResult PlacedOrders()
+        {
+            return View();
+        }
+
+        public ActionResult OrderDetails(int basketId)
+        {
+            List<BasketItemDetails> _basketitems = new List<BasketItemDetails>();
+            _basketitems = _context.BasketItemDetails.Where(b=>b.BasketID== basketId).ToList();
+            return PartialView("_OrderedBasketsPartialView", _basketitems);
+        }
+
     }
 }
