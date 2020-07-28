@@ -15,7 +15,7 @@ namespace EntityModel
         public int ID { get; set; }
 
         [DisplayName("Basket")]
-        public int BasketID { get; set; }
+        public int? BasketID { get; set; }
 
         [DisplayName("Product Id")]
         public int ProductID { get; set; }

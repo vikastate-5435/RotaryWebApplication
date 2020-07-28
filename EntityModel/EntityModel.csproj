@@ -58,6 +58,10 @@
     <Compile Include="Migrations\202007281225277_ Add Database .designer.cs">
       <DependentUpon>202007281225277_ Add Database .cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007281351464_ Add Database new.cs" />
+    <Compile Include="Migrations\202007281351464_ Add Database new.designer.cs">
+      <DependentUpon>202007281351464_ Add Database new.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrderBasket.cs" />
     <Compile Include="ProductMaster.cs" />
@@ -72,6 +76,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202007281225277_ Add Database .resx">
       <DependentUpon>202007281225277_ Add Database .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007281351464_ Add Database new.resx">
+      <DependentUpon>202007281351464_ Add Database new.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
