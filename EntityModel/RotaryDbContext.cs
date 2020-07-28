@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace EntityModel
 {
-  public class RotaryDbContext : DbContext
+    public class RotaryDbContext : DbContext
     {
-        public RotaryDbContext()  : base("name=rotaryContext")
+        public RotaryDbContext() : base("name=rotaryContext")
         {
         }
         public virtual DbSet<BasketMaster> BasketMasters { get; set; }
         public virtual DbSet<BasketItemDetails> BasketItemDetails { get; set; }
         public virtual DbSet<ProductMaster> Products { get; set; }
         public virtual DbSet<UnitMaster> Units { get; set; }
-
+        public virtual DbSet<OrderBasket> OrderBaskets { get; set; }
     }
 }

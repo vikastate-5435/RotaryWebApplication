@@ -1,0 +1,29 @@
+﻿@model IEnumerable<EntityModel.BasketMaster>
+<table class="table table-responsive table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BasketName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SKUID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasketName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SKUID)
+            </td>
+            <td>
+                <button type="button" class="btn btn-link" onclick="PlaceBasketOrder(@item.BasketID)">Place Basket Order </button> |
+                <button type="button" class="btn btn-link" onclick="LoadBasketListPopModel(@item.BasketID)"> Basket Products </button>
+            </td>
+        </tr>
+    }
+
+</table>

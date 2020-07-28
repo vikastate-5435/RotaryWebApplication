@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .modal-dialog {
+        overflow-y: initial !important
+    }
+
+    .modal-body {
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+    }
+</style>
+
+@*<br />
+    <br />
+    <br />
+    @Ajax.ActionLink("Get All Basket", "GetAllBasket",new AjaxOptions()
+    {
+    HttpMethod="Get",
+    UpdateTargetId= "divBasket",
+    InsertionMode=InsertionMode.Replace
+    })
+    <br />
+    <br />
+    <br />
+    @Ajax.ActionLink("Get All Basket", "GetAllBasket",new AjaxOptions()
+    {
+    HttpMethod="Get",
+    UpdateTargetId= "divBasket",
+    InsertionMode=InsertionMode.Replace
+    })
+*@
+<br />
+<hr />
+
+<div id="divBasket">
+    @model IEnumerable<EntityModel.BasketMaster>
+    <table class="table table-responsive table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BasketName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SKUID)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasketName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SKUID)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-link" onclick="LoadBasketListPopModel(@item.BasketID)"> Basket Products </button>
+                    |
+                    <button type="button" class="btn btn-link" onclick="PlaceBasketOrder(@item.BasketID)">Place Basket Order </button>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+
+
+<div class="modal fade product_view" id="basketProductList">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title"> Basket Product List </h3>
+            </div>
+            <div class="modal-body" id="basketItems">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var LoadBasketListPopModel = function (basketId) {
+        var url = "/Home/GetBasketDetails?basketId=" + basketId;
+        $("#basketItems").load(url, function (data) {
+            $("#basketProductList").modal("show");
+        })
+    }
+
+    //var Orderurl = "/Home/PlaceBasketOrder?basketId=" + basketId;
+    //var LoadBasketListPopModel = function (basketId) {
+    //    var url = Orderurl;
+    //    $("#basketItems").load(url, function (data) {
+    //        alert("Your order placed sucessfully");
+    //    })
+
+    //}
+    var PlaceBasketOrder = function (basketId) {
+        debugger;
+        var r = confirm("Are you sure you want to place this order!");
+        if (r == true) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/Home/PlaceBasketOrder',
+                data: {
+                    'basketId': basketId
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        alert('Order placed sucessfully');
+                    }
+                    else {
+                        alert('Something went wrong.');
+                    }
+
+                }
+            });
+        }
+
+    }
+
+
+
+
+</script>
