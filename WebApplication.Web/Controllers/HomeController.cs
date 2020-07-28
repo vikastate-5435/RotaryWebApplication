@@ -75,7 +75,10 @@ namespace WebApplication.Web.Controllers
 
         public ActionResult PlacedOrders()
         {
-            return View();
+            List<OrderBasket> _orders = new List<OrderBasket>();
+            _orders = _context.OrderBaskets.ToList();
+
+            return View(_orders);
         }
 
         public ActionResult OrderDetails(int basketId)
