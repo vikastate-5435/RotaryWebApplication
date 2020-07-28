@@ -54,6 +54,11 @@
     <Compile Include="BasketItemDetails.cs" />
     <Compile Include="BasketMaster.cs" />
     <Compile Include="BasketModel.cs" />
+    <Compile Include="Migrations\202007281225277_ Add Database .cs" />
+    <Compile Include="Migrations\202007281225277_ Add Database .designer.cs">
+      <DependentUpon>202007281225277_ Add Database .cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrderBasket.cs" />
     <Compile Include="ProductMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +68,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202007281225277_ Add Database .resx">
+      <DependentUpon>202007281225277_ Add Database .cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

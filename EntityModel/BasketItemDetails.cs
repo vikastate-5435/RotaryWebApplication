@@ -35,8 +35,11 @@ namespace EntityModel
         [DataType(DataType.DateTime)]
         public DateTime ApplicableTo { get; set; }
         public int Quantity { get; set; }
-
         public decimal KG { get; set; }
-       
+
+        [ForeignKey("BasketID")]
+        public BasketMaster BasketMasters { get; set; }
+
+
     }
 }

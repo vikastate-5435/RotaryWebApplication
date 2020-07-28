@@ -24,7 +24,8 @@ namespace EntityModel
         [StringLength(250)]
         public string OrderBy { get; set; }
 
-
+        [ForeignKey("BasketID")]
+        public BasketMaster BasketMasters { get; set; }
     }
 
 }
