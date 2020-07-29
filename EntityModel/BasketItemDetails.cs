@@ -21,7 +21,7 @@ namespace EntityModel
         public int ProductID { get; set; }
 
         [DisplayName("Product")]
-        [StringLength(100)]
+        [StringLength(200)]
         public string ProductName { get; set; }
 
         [StringLength(100)]

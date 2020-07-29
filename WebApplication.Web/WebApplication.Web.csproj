@@ -133,6 +133,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\APIRepository.cs" />
+    <Compile Include="Helper\URLHelper.cs" />
+    <Compile Include="Models\OrderQuantityViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -188,10 +191,10 @@
     <Content Include="Views\Shared\_BasketDetailsPartialView.cshtml" />
     <Content Include="Views\Shared\_OrderedBasketsPartialView.cshtml" />
     <Content Include="Views\Home\PlacedOrders.cshtml" />
+    <Content Include="Views\Home\Indent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

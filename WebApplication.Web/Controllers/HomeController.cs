@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.Web.Models;
 
 namespace WebApplication.Web.Controllers
 {
@@ -28,6 +29,67 @@ namespace WebApplication.Web.Controllers
             List<BasketItemDetails> _basketDetails = new List<BasketItemDetails>();
             _basketDetails = _context.BasketItemDetails.Where(b => b.BasketID == basketId).ToList();
             return PartialView("_BasketDetailPartialView", _basketDetails);
+        }
+
+
+        public ActionResult Indent()
+        {
+
+            var q = (from ob in _context.OrderBaskets
+                     join bid in _context.BasketItemDetails on ob.BasketID equals bid.BasketID
+                     orderby ob.OrderId
+                     select new
+                     {
+                         ob.OrderId,
+                         ob.OrderDate,
+                         ob.BasketID,
+                         ob.BasketName,
+                         ob.SKUID,
+                         bid.ProductID,
+                         bid.ProductName,
+                         bid.Quantity,
+                         bid.ApplicableFrom,
+                         bid.ApplicableTo,
+                         bid.KG,
+                     }).ToList();
+            List<OrderQuantityViewModel> prodList = new List<OrderQuantityViewModel>();
+
+            var baskTotals = from p in q
+                             group p by p.ProductID into productgroup
+                             select new
+                             {
+                                 ProductId = productgroup.Key,
+                                 prodTotalQty = productgroup.Sum(x => x.Quantity),
+                                 prodTotalKG = Convert.ToDecimal(productgroup.Sum(x => x.KG))
+                             };
+
+
+            var basketIndents = (from bd in q
+                                 join tb in baskTotals on bd.ProductID equals tb.ProductId
+                                 orderby bd.ProductID
+                                 select new
+                                 {
+                                     bd.ProductID,
+                                     bd.ProductName,
+                                     bd.SKUID,
+                                     tb.prodTotalQty,
+                                     tb.prodTotalKG
+                                 }).Distinct();
+
+            List<OrderQuantityViewModel> vm = new List<OrderQuantityViewModel>();
+
+            foreach (var item in basketIndents)
+            {
+                OrderQuantityViewModel vmi = new OrderQuantityViewModel();
+                vmi.ProductID = item.ProductID;
+                vmi.ProductName = item.ProductName;
+                vmi.SKU = item.SKUID;
+                vmi.Quantity = item.prodTotalQty;
+                vmi.KG = item.prodTotalKG;
+                vm.Add(vmi);
+            }
+
+            return View(vm);
         }
 
 
@@ -84,7 +146,7 @@ namespace WebApplication.Web.Controllers
         public ActionResult OrderDetails(int basketId)
         {
             List<BasketItemDetails> _basketitems = new List<BasketItemDetails>();
-            _basketitems = _context.BasketItemDetails.Where(b=>b.BasketID== basketId).ToList();
+            _basketitems = _context.BasketItemDetails.Where(b => b.BasketID == basketId).ToList();
             return PartialView("_OrderedBasketsPartialView", _basketitems);
         }
 

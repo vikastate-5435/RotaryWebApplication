@@ -20,8 +20,10 @@ namespace RotaryWebApplication.Controllers
         // GET: api/OrderBaskets
         public IQueryable<OrderBasket> GetOrderBaskets()
         {
-            return db.OrderBaskets;
+            return db.OrderBaskets.Include(b=>b.BasketMasters);
         }
+
+
 
         // GET: api/OrderBaskets/5
         [ResponseType(typeof(OrderBasket))]
